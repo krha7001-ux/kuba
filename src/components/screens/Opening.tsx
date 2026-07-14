@@ -1,3 +1,5 @@
+import RangeMap from '../RangeMap';
+
 interface OpeningProps {
   onStart: () => void;
 }
@@ -5,6 +7,9 @@ interface OpeningProps {
 export default function Opening({ onStart }: OpeningProps) {
   return (
     <section className="screen opening">
+      <div className="opening-file-corner" aria-hidden="true">
+        תיק מבצעים 8-62-C<br />הוועדה המבצעת · הבית הלבן
+      </div>
       <div className="opening-stamp">מסמך מסווג · 16.10.1962</div>
       <h2 className="opening-title">
         13 ימים על סף מלחמה גרעינית
@@ -14,6 +19,8 @@ export default function Opening({ onStart }: OpeningProps) {
         ברית המועצות מציבה טילים גרעיניים במרחק 150 ק"מ בלבד מחופי ארצות הברית.
         הנשיא קנדי ויועציו חייבים להחליט — ומהר. כל טעות עלולה להצית מלחמת עולם שלישית.
       </p>
+
+      <RangeMap />
 
       <div className="opening-cards">
         <div className="card mission-card">

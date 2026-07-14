@@ -1,22 +1,25 @@
 /* ===== חדר מצב 1962 — עיצוב גלובלי ===== */
 
+/* פלטה תקופתית: כחול-פחם, אפור, ירוק זית, בז' נייר — ואדום כהדגשה בלבד */
 :root {
-  --bg: #0d1421;
-  --bg-soft: #131d2f;
-  --panel: #1a2740;
-  --panel-light: #223252;
-  --border: #2e4265;
-  --text: #e8eef8;
-  --text-dim: #9fb0ca;
-  --amber: #f5b942;
-  --amber-dark: #c98f1b;
-  --red: #e4574f;
-  --green: #4fc47f;
-  --blue: #5aa2e8;
-  --paper: #f4ecd8;
-  --paper-ink: #33291a;
-  --radius: 12px;
-  --shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  --bg: #10151c;
+  --bg-soft: #161d26;
+  --panel: #1b232d;
+  --panel-light: #232e3a;
+  --border: #3a4450;
+  --text: #e6e3d5;
+  --text-dim: #a4a494;
+  --amber: #d3c39a;        /* מנילה / בז' תיקיות — צבע ההדגשה הראשי */
+  --amber-dark: #a08c5e;
+  --red: #c24b42;          /* אדום תקופתי — חותמות והתראות בלבד */
+  --green: #a8b184;        /* ירוק זית בהיר */
+  --olive: #6f7d55;        /* ירוק זית עמוק */
+  --blue: #8ba4bd;         /* כחול פלדה מעומעם */
+  --paper: #e9dfc4;
+  --paper-ink: #2e2718;
+  --ink-on-brass: #2b2413;
+  --radius: 6px;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
   --font: 'Segoe UI', 'Heebo', 'Arial Hebrew', Tahoma, Arial, sans-serif;
   --mono: 'Courier New', Courier, monospace;
 }
@@ -33,10 +36,13 @@ html {
 
 body {
   font-family: var(--font);
+  /* תאורת חדר מעומעמת: הבהוב מנורה חלש מלמעלה, האפלה בשוליים, פסי מסך ישן עדינים */
   background:
-    radial-gradient(ellipse at 20% -10%, rgba(90, 162, 232, 0.12), transparent 55%),
-    radial-gradient(ellipse at 85% 110%, rgba(245, 185, 66, 0.07), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 4px),
+    radial-gradient(ellipse 90% 55% at 50% -5%, rgba(211, 195, 154, 0.055), transparent 70%),
+    radial-gradient(ellipse 140% 90% at 50% 115%, rgba(0, 0, 0, 0.55), transparent 65%),
     var(--bg);
+  background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
   line-height: 1.65;
@@ -83,7 +89,7 @@ button {
 .header-title {
   font-size: clamp(1.35rem, 4vw, 2rem);
   color: var(--amber);
-  text-shadow: 0 0 24px rgba(245, 185, 66, 0.25);
+  text-shadow: 0 0 24px rgba(211, 195, 154, 0.25);
 }
 
 .header-sub {
@@ -97,7 +103,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(13, 20, 33, 0.92);
+  background: rgba(16, 21, 28, 0.94);
   backdrop-filter: blur(8px);
   padding: 0.6rem 0;
   margin: 0 -1rem 1.2rem;
@@ -133,12 +139,12 @@ button {
 
 .step-chip.done {
   color: var(--green);
-  border-color: rgba(79, 196, 127, 0.4);
+  border-color: rgba(168, 177, 132, 0.4);
 }
 
 .step-chip.active {
   background: var(--amber);
-  color: #201500;
+  color: var(--ink-on-brass);
   border-color: var(--amber);
   font-weight: 700;
 }
@@ -222,8 +228,8 @@ button {
   display: flex;
   gap: 0.8rem;
   align-items: flex-start;
-  background: rgba(90, 162, 232, 0.08);
-  border: 1px solid rgba(90, 162, 232, 0.3);
+  background: rgba(139, 164, 189, 0.08);
+  border: 1px solid rgba(139, 164, 189, 0.3);
   border-radius: var(--radius);
   padding: 1rem 1.2rem;
   margin: 1.2rem 0;
@@ -251,12 +257,12 @@ button {
 
 .btn-primary {
   background: linear-gradient(180deg, var(--amber), var(--amber-dark));
-  color: #201500;
-  box-shadow: 0 4px 16px rgba(245, 185, 66, 0.3);
+  color: var(--ink-on-brass);
+  box-shadow: 0 4px 16px rgba(211, 195, 154, 0.3);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 22px rgba(245, 185, 66, 0.45);
+  box-shadow: 0 6px 22px rgba(211, 195, 154, 0.45);
 }
 
 .btn-primary:disabled {
@@ -369,7 +375,7 @@ button {
   top: -0.8rem;
   right: 1rem;
   background: var(--amber);
-  color: #201500;
+  color: var(--ink-on-brass);
   font-weight: 800;
   width: 1.9rem;
   height: 1.9rem;
@@ -422,7 +428,7 @@ button {
   background: var(--panel-light);
   border-color: var(--amber);
   color: var(--text);
-  box-shadow: 0 0 0 2px rgba(245, 185, 66, 0.25);
+  box-shadow: 0 0 0 2px rgba(211, 195, 154, 0.25);
 }
 
 .stage-node-icon {
@@ -447,8 +453,8 @@ button {
 }
 
 .stage-example {
-  background: rgba(245, 185, 66, 0.07);
-  border: 1px dashed rgba(245, 185, 66, 0.4);
+  background: rgba(211, 195, 154, 0.07);
+  border: 1px dashed rgba(211, 195, 154, 0.4);
   border-radius: var(--radius);
   padding: 0.9rem 1rem;
   margin-top: 0.9rem;
@@ -592,7 +598,7 @@ button {
 }
 
 .photo-crosshair {
-  color: rgba(245, 185, 66, 0.85);
+  color: rgba(211, 195, 154, 0.85);
   font-size: 2rem;
 }
 
@@ -614,9 +620,9 @@ button {
   border-radius: 999px;
 }
 
-.confidence-badge.high { background: rgba(79, 196, 127, 0.15); color: var(--green); }
-.confidence-badge.mid { background: rgba(245, 185, 66, 0.15); color: var(--amber); }
-.confidence-badge.low { background: rgba(228, 87, 79, 0.15); color: var(--red); }
+.confidence-badge.high { background: rgba(168, 177, 132, 0.15); color: var(--green); }
+.confidence-badge.mid { background: rgba(211, 195, 154, 0.15); color: var(--amber); }
+.confidence-badge.low { background: rgba(194, 75, 66, 0.15); color: var(--red); }
 
 /* ===== כרטיסי אישים ===== */
 
@@ -778,7 +784,7 @@ button {
 .summary-card.ready {
   border-color: var(--green);
   border-style: solid;
-  box-shadow: 0 0 0 2px rgba(79, 196, 127, 0.2);
+  box-shadow: 0 0 0 2px rgba(168, 177, 132, 0.2);
 }
 
 .agent-summary dt {
@@ -839,15 +845,15 @@ button {
   background: var(--border);
 }
 
-.terminal-dots i:nth-child(1) { background: #e4574f; }
-.terminal-dots i:nth-child(2) { background: #f5b942; }
-.terminal-dots i:nth-child(3) { background: #4fc47f; }
+.terminal-dots i:nth-child(1) { background: #c24b42; }
+.terminal-dots i:nth-child(2) { background: #d3c39a; }
+.terminal-dots i:nth-child(3) { background: #a8b184; }
 
 .prompt-textarea {
   width: 100%;
   background: transparent;
   border: none;
-  color: #d7f2c9;
+  color: #cfe0b8;
   font-family: var(--mono);
   font-size: 0.9rem;
   line-height: 1.7;
@@ -858,7 +864,7 @@ button {
 
 .prompt-textarea:focus {
   outline: none;
-  background: rgba(90, 162, 232, 0.04);
+  background: rgba(139, 164, 189, 0.04);
 }
 
 .prompt-card .btn-small {
@@ -904,18 +910,18 @@ button {
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  border: 2px solid rgba(79, 196, 127, 0.5);
+  border: 2px solid rgba(168, 177, 132, 0.5);
   flex-shrink: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle, transparent 55%, rgba(79, 196, 127, 0.12) 56%),
-    radial-gradient(circle, transparent 30%, rgba(79, 196, 127, 0.08) 31%);
+    radial-gradient(circle, transparent 55%, rgba(168, 177, 132, 0.12) 56%),
+    radial-gradient(circle, transparent 30%, rgba(168, 177, 132, 0.08) 31%);
 }
 
 .radar span {
   position: absolute;
   inset: 0;
-  background: conic-gradient(from 0deg, rgba(79, 196, 127, 0.7), transparent 70deg);
+  background: conic-gradient(from 0deg, rgba(168, 177, 132, 0.7), transparent 70deg);
   animation: sweep 1.6s linear infinite;
   border-radius: 50%;
 }
@@ -926,7 +932,7 @@ button {
 
 .agent-output {
   margin-top: 1rem;
-  border-color: rgba(90, 162, 232, 0.5);
+  border-color: rgba(139, 164, 189, 0.5);
 }
 
 .agent-output-header {
@@ -946,7 +952,7 @@ button {
 }
 
 .agent-summary-line {
-  background: rgba(90, 162, 232, 0.1);
+  background: rgba(139, 164, 189, 0.1);
   border-radius: 8px;
   padding: 0.6rem 0.9rem;
   font-weight: 600;
@@ -1001,15 +1007,15 @@ button {
   border-radius: 999px;
 }
 
-.risk-low { background: rgba(79, 196, 127, 0.15); color: var(--green); }
-.risk-mid { background: rgba(245, 185, 66, 0.15); color: var(--amber); }
-.risk-high { background: rgba(228, 87, 79, 0.15); color: var(--red); }
+.risk-low { background: rgba(168, 177, 132, 0.15); color: var(--green); }
+.risk-mid { background: rgba(211, 195, 154, 0.15); color: var(--amber); }
+.risk-high { background: rgba(194, 75, 66, 0.15); color: var(--red); }
 
 .action-outcome {
   margin-top: 0.8rem;
   padding: 0.8rem;
-  background: rgba(245, 185, 66, 0.08);
-  border: 1px dashed rgba(245, 185, 66, 0.4);
+  background: rgba(211, 195, 154, 0.08);
+  border: 1px dashed rgba(211, 195, 154, 0.4);
   border-radius: 8px;
   font-size: 0.88rem;
 }
@@ -1090,7 +1096,7 @@ button {
 
 .comparison-col-title.fde {
   border-color: var(--amber);
-  background: rgba(245, 185, 66, 0.08);
+  background: rgba(211, 195, 154, 0.08);
 }
 
 .comparison-col-title.fde h3 {
@@ -1138,14 +1144,14 @@ button {
 }
 
 .comparison-cell.fde {
-  border-color: rgba(245, 185, 66, 0.5);
-  background: rgba(245, 185, 66, 0.06);
+  border-color: rgba(211, 195, 154, 0.5);
+  background: rgba(211, 195, 154, 0.06);
 }
 
 .final-callout {
   margin-top: 1.8rem;
-  border-color: rgba(245, 185, 66, 0.4);
-  background: rgba(245, 185, 66, 0.07);
+  border-color: rgba(211, 195, 154, 0.4);
+  background: rgba(211, 195, 154, 0.07);
 }
 
 /* ===== רספונסיביות למובייל ===== */
@@ -1199,9 +1205,9 @@ button {
   font-family: var(--font);
 }
 
-.source-authentic { color: var(--green); border-color: rgba(79, 196, 127, 0.5); background: rgba(79, 196, 127, 0.08); }
-.source-processed { color: var(--blue); border-color: rgba(90, 162, 232, 0.5); background: rgba(90, 162, 232, 0.08); }
-.source-simulated { color: var(--amber); border-color: rgba(245, 185, 66, 0.5); background: rgba(245, 185, 66, 0.08); }
+.source-authentic { color: var(--green); border-color: rgba(168, 177, 132, 0.5); background: rgba(168, 177, 132, 0.08); }
+.source-processed { color: var(--blue); border-color: rgba(139, 164, 189, 0.5); background: rgba(139, 164, 189, 0.08); }
+.source-simulated { color: var(--amber); border-color: rgba(211, 195, 154, 0.5); background: rgba(211, 195, 154, 0.08); }
 
 .source-note {
   margin-top: 0.4rem;
@@ -1300,13 +1306,13 @@ button {
 .doc-option.good {
   border-color: var(--green);
   color: var(--green);
-  background: rgba(79, 196, 127, 0.08);
+  background: rgba(168, 177, 132, 0.08);
 }
 
 .doc-option.partial {
   border-color: var(--amber);
   color: var(--amber);
-  background: rgba(245, 185, 66, 0.08);
+  background: rgba(211, 195, 154, 0.08);
 }
 
 .doc-feedback {
@@ -1318,13 +1324,13 @@ button {
 }
 
 .doc-feedback.good {
-  background: rgba(79, 196, 127, 0.1);
-  border: 1px solid rgba(79, 196, 127, 0.35);
+  background: rgba(168, 177, 132, 0.1);
+  border: 1px solid rgba(168, 177, 132, 0.35);
 }
 
 .doc-feedback.partial {
-  background: rgba(245, 185, 66, 0.1);
-  border: 1px solid rgba(245, 185, 66, 0.35);
+  background: rgba(211, 195, 154, 0.1);
+  border: 1px solid rgba(211, 195, 154, 0.35);
 }
 
 /* ===== לוח ראיות ===== */
@@ -1414,7 +1420,7 @@ button {
 
 .evidence-bottleneck-choice.chosen {
   border-color: var(--amber);
-  background: rgba(245, 185, 66, 0.12);
+  background: rgba(211, 195, 154, 0.12);
   color: var(--amber);
   font-weight: 700;
 }
@@ -1424,8 +1430,8 @@ button {
 }
 
 .board-done {
-  border-color: rgba(79, 196, 127, 0.5);
-  background: rgba(79, 196, 127, 0.07);
+  border-color: rgba(168, 177, 132, 0.5);
+  background: rgba(168, 177, 132, 0.07);
 }
 
 /* ===== מחוון איכות הפרומפט ===== */
@@ -1456,11 +1462,11 @@ button {
   font-weight: 600;
 }
 
-.band-draft { border-color: rgba(228, 87, 79, 0.5); background: rgba(228, 87, 79, 0.07); }
+.band-draft { border-color: rgba(194, 75, 66, 0.5); background: rgba(194, 75, 66, 0.07); }
 .band-draft .rubric-total-score { color: var(--red); }
-.band-progress { border-color: rgba(245, 185, 66, 0.5); background: rgba(245, 185, 66, 0.07); }
+.band-progress { border-color: rgba(211, 195, 154, 0.5); background: rgba(211, 195, 154, 0.07); }
 .band-progress .rubric-total-score { color: var(--amber); }
-.band-operational { border-color: rgba(79, 196, 127, 0.5); background: rgba(79, 196, 127, 0.07); }
+.band-operational { border-color: rgba(168, 177, 132, 0.5); background: rgba(168, 177, 132, 0.07); }
 .band-operational .rubric-total-score { color: var(--green); }
 
 .rubric-list {
@@ -1477,9 +1483,9 @@ button {
   padding: 0.6rem 0.8rem;
 }
 
-.rubric-item.score-2 { border-color: rgba(79, 196, 127, 0.4); }
-.rubric-item.score-1 { border-color: rgba(245, 185, 66, 0.4); }
-.rubric-item.score-0 { border-color: rgba(228, 87, 79, 0.4); }
+.rubric-item.score-2 { border-color: rgba(168, 177, 132, 0.4); }
+.rubric-item.score-1 { border-color: rgba(211, 195, 154, 0.4); }
+.rubric-item.score-0 { border-color: rgba(194, 75, 66, 0.4); }
 
 .rubric-item-head {
   display: flex;
@@ -1612,7 +1618,7 @@ button {
 
 .phase-tone-0 { border-right-color: var(--text-dim); }
 .phase-tone-1 { border-right-color: var(--blue); }
-.phase-tone-2 { border-right-color: #a78bfa; }
+.phase-tone-2 { border-right-color: #9aa5b1; }
 .phase-tone-3 { border-right-color: var(--amber); }
 .phase-tone-4 { border-right-color: var(--green); }
 .phase-tone-5 { border-right-color: var(--red); }
@@ -1635,9 +1641,9 @@ button {
   background: var(--panel);
 }
 
-.sim-chip.quality-low { color: var(--red); border-color: rgba(228, 87, 79, 0.5); }
-.sim-chip.quality-mid { color: var(--amber); border-color: rgba(245, 185, 66, 0.5); }
-.sim-chip.quality-high { color: var(--green); border-color: rgba(79, 196, 127, 0.5); }
+.sim-chip.quality-low { color: var(--red); border-color: rgba(194, 75, 66, 0.5); }
+.sim-chip.quality-mid { color: var(--amber); border-color: rgba(211, 195, 154, 0.5); }
+.sim-chip.quality-high { color: var(--green); border-color: rgba(168, 177, 132, 0.5); }
 
 .sim-role-flavor {
   color: var(--text-dim);
@@ -1656,8 +1662,8 @@ button {
 .conf-low { color: var(--red); }
 
 .sim-gaps {
-  background: rgba(228, 87, 79, 0.07);
-  border: 1px dashed rgba(228, 87, 79, 0.4);
+  background: rgba(194, 75, 66, 0.07);
+  border: 1px dashed rgba(194, 75, 66, 0.4);
   border-radius: 10px;
   padding: 0.7rem 1rem;
   margin-top: 0.8rem;
@@ -1677,18 +1683,18 @@ button {
 }
 
 .debrief-hallucination {
-  border-color: rgba(228, 87, 79, 0.55);
-  background: rgba(228, 87, 79, 0.09);
+  border-color: rgba(194, 75, 66, 0.55);
+  background: rgba(194, 75, 66, 0.09);
 }
 
 .debrief-praise {
-  border-color: rgba(79, 196, 127, 0.45);
-  background: rgba(79, 196, 127, 0.07);
+  border-color: rgba(168, 177, 132, 0.45);
+  background: rgba(168, 177, 132, 0.07);
 }
 
 .debrief-safety, .debrief-quality, .debrief-gap {
-  border-color: rgba(245, 185, 66, 0.45);
-  background: rgba(245, 185, 66, 0.06);
+  border-color: rgba(211, 195, 154, 0.45);
+  background: rgba(211, 195, 154, 0.06);
 }
 
 .debrief .btn {
@@ -1875,5 +1881,372 @@ button {
 
   .report-sheet {
     padding: 1rem;
+  }
+}
+
+/* ============================================================
+   שכבת "חדר מצב 1962" — רכיבים תקופתיים
+   ============================================================ */
+
+/* ===== שעוני קיר: וושינגטון / מוסקבה / הוואנה + כוננות ===== */
+
+.world-clocks {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  background: linear-gradient(180deg, #202832, #171e26);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.3rem 0.9rem;
+  min-width: 7.2rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.clock-city {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+}
+
+.clock-time {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--green);
+  direction: ltr;
+  text-shadow: 0 0 8px rgba(168, 177, 132, 0.35);
+}
+
+.clock.defcon .defcon-level {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  direction: ltr;
+}
+
+.defcon-lamp {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 7px rgba(194, 75, 66, 0.8);
+  animation: lamp-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes lamp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ===== לוח מפות: טווחי הטילים ===== */
+
+.range-map {
+  max-width: 46rem;
+  margin: 0 auto 1.8rem;
+  background: #171d18;
+  border: 1px solid #39432f;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow), inset 0 0 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.range-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.range-map-plate {
+  background: linear-gradient(180deg, #2a3140, #1d232e);
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.range-map-caption {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  padding: 0.4rem 1rem 0.6rem;
+  text-align: center;
+}
+
+/* ===== מסך פתיחה: שער תיק מבצעים ===== */
+
+.opening {
+  position: relative;
+  border: 1px solid var(--border);
+  outline: 1px solid rgba(211, 195, 154, 0.25);
+  outline-offset: -8px;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(211, 195, 154, 0.05), transparent 65%),
+    var(--panel);
+  padding: 2.2rem 1.4rem 2rem;
+  box-shadow: var(--shadow);
+}
+
+.opening-file-corner {
+  position: absolute;
+  top: 1rem;
+  right: 1.1rem;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ===== תיק לקוח: לשוניות תיקיית מנילה ===== */
+
+.tabs {
+  border-bottom: 2px solid rgba(211, 195, 154, 0.45);
+  padding: 0 0.4rem;
+  gap: 0.25rem;
+}
+
+.tab {
+  border-radius: 6px 6px 0 0;
+  border-bottom: none;
+  margin-bottom: 0;
+  background: linear-gradient(180deg, #232b35, #1b232d);
+}
+
+.tab.active {
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-weight: 700;
+  border-color: rgba(211, 195, 154, 0.45);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== מברק: נייר טלפרינטר ===== */
+
+.telegram {
+  position: relative;
+  letter-spacing: 0.015em;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 26px, rgba(51, 41, 26, 0.045) 26px 27px),
+    var(--paper);
+  border-top: 2px dashed rgba(51, 41, 26, 0.35);
+  border-bottom: 2px dashed rgba(51, 41, 26, 0.35);
+}
+
+.telegram::before {
+  content: '· · · — — — · · ·';
+  display: block;
+  text-align: center;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  color: rgba(51, 41, 26, 0.4);
+  margin-bottom: 0.4rem;
+}
+
+/* ===== שולחן אנליטי: לוח שעם לראיות ===== */
+
+.evidence-board {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.12) 1px, transparent 1.5px),
+    radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.1) 1px, transparent 1.5px),
+    linear-gradient(180deg, #2b2620, #241f1a);
+  background-size: 90px 90px, 70px 70px, 100% 100%;
+  border: 6px solid #3d3428;
+  border-radius: 4px;
+  padding: 1.2rem 1.4rem 1.6rem;
+  margin-top: 2.2rem;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4), var(--shadow);
+}
+
+.evidence-board .section-title {
+  color: var(--amber);
+  margin-top: 0.2rem;
+}
+
+.evidence-card {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(51, 41, 26, 0.06) 22px 23px),
+    var(--paper);
+  color: var(--paper-ink);
+  border: 1px solid rgba(51, 41, 26, 0.3);
+  border-radius: 2px;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.45);
+}
+
+.evidence-grid .evidence-card:nth-child(odd) { transform: rotate(-0.7deg); }
+.evidence-grid .evidence-card:nth-child(even) { transform: rotate(0.6deg); }
+
+.evidence-card:hover {
+  border-color: var(--amber-dark);
+  transform: rotate(0deg) translateY(-2px);
+}
+
+.evidence-card p {
+  color: var(--paper-ink);
+}
+
+.evidence-card.pinned {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(51, 41, 26, 0.06) 22px 23px),
+    #f2e8cc;
+  border: 2px solid var(--red);
+  color: var(--paper-ink);
+  transform: rotate(0deg);
+}
+
+.evidence-source {
+  color: #7a6330;
+}
+
+.evidence-subtitle {
+  color: var(--paper);
+}
+
+/* ===== תכנון סוכן: מודולים של לוח בקרה ===== */
+
+.form-card {
+  padding-top: 0;
+  overflow: hidden;
+}
+
+.form-card h3 {
+  margin: 0 -1.2rem 0.8rem;
+  padding: 0.55rem 1.2rem;
+  background: linear-gradient(180deg, rgba(111, 125, 85, 0.35), rgba(111, 125, 85, 0.18));
+  border-bottom: 1px solid rgba(168, 177, 132, 0.3);
+  color: var(--text);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.summary-card {
+  padding-top: 0;
+}
+
+/* ===== סימולציה: קונסולת חדר מצב ===== */
+
+.agent-output {
+  background: #141a12;
+  border: 1px solid #45523a;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5), var(--shadow);
+}
+
+.agent-output-header {
+  border-bottom: 1px dashed #45523a;
+  padding-bottom: 0.7rem;
+}
+
+.agent-output-header h3 {
+  color: var(--green);
+  font-family: var(--mono);
+}
+
+.agent-output h4 {
+  color: var(--green);
+}
+
+.agent-summary-line {
+  background: rgba(168, 177, 132, 0.1);
+  border: 1px solid rgba(168, 177, 132, 0.25);
+}
+
+.sim-chip {
+  border-radius: 4px;
+  font-family: var(--mono);
+  background: linear-gradient(180deg, #202832, #171e26);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ===== רפלקציה: רגוע ומסודר יותר ===== */
+
+.reflection-card {
+  background: linear-gradient(180deg, rgba(233, 223, 196, 0.06), rgba(233, 223, 196, 0.02)), var(--panel);
+  border-color: rgba(211, 195, 154, 0.28);
+  box-shadow: none;
+}
+
+.reflection-card h3 {
+  color: var(--amber);
+  font-size: 1rem;
+}
+
+.reflection-textarea {
+  background: rgba(16, 21, 28, 0.6);
+}
+
+/* ===== באנר שלב: לוחית מתכת ===== */
+
+.phase-banner {
+  background: linear-gradient(180deg, #232b35, #1b222b);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 8px rgba(0, 0, 0, 0.35);
+  font-family: var(--font);
+}
+
+/* ===== התאמות קטנות ===== */
+
+.header-title {
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 0 22px rgba(211, 195, 154, 0.18);
+}
+
+.prompt-card-header {
+  background: linear-gradient(180deg, #202832, #171e26);
+}
+
+.photo-frame {
+  border-radius: 2px;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.55);
+}
+
+.photo-card {
+  background: #20261f;
+  border-color: #39432f;
+}
+
+@media (max-width: 720px) {
+  .world-clocks {
+    gap: 0.4rem;
+  }
+
+  .clock {
+    min-width: 6rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .opening {
+    padding: 1.6rem 1rem 1.4rem;
+  }
+
+  .opening-file-corner {
+    position: static;
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .evidence-board {
+    padding: 0.9rem 0.8rem 1.2rem;
+    border-width: 4px;
+  }
+}
+
+@media print {
+  .world-clocks {
+    display: none !important;
   }
 }

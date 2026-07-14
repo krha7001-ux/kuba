@@ -1,6 +1,7 @@
 import { useStudentWork } from './hooks/useStudentWork';
 import StepNav from './components/StepNav';
 import PhaseBanner from './components/PhaseBanner';
+import WorldClocks from './components/WorldClocks';
 import Opening from './components/screens/Opening';
 import FdeIntro from './components/screens/FdeIntro';
 import Stages from './components/screens/Stages';
@@ -71,10 +72,11 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="header-inner">
-          <span className="header-badge">סודי ביותר · TOP SECRET</span>
-          <h1 className="header-title">🛰️ חדר מצב: משבר הטילים בקובה</h1>
+          <span className="header-badge">סודי ביותר · TOP SECRET · EYES ONLY</span>
+          <h1 className="header-title">חדר מצב: משבר הטילים בקובה</h1>
           <span className="header-sub">הדמיה לימודית · אוקטובר 1962 · מתודת FDE</span>
         </div>
+        <WorldClocks />
       </header>
 
       {step > 0 && <StepNav steps={steps} phases={phases} current={step} onSelect={goTo} />}
