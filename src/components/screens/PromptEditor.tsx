@@ -1,35 +1,29 @@
-import { useMemo, useState } from 'react';
-import { AgentConfig } from '../../types';
+import { StudentWork } from '../../types';
 import { promptTemplate } from '../../data/content';
+import { evaluatePrompt } from '../../data/promptRubric';
 
 interface PromptEditorProps {
-  config: AgentConfig;
+  work: StudentWork;
+  update: (patch: Partial<StudentWork>) => void;
 }
 
-const checklist = [
-  { id: 'identity', label: 'זהות ותפקיד ("אתה אנליסט...")', keywords: ['אתה', 'תפקיד'] },
-  { id: 'context', label: 'הקשר היסטורי (1962, קובה)', keywords: ['1962', 'קובה'] },
-  { id: 'rules', label: 'כללי בטיחות (אל תמציא, ודאות)', keywords: ['אל תמציא', 'ודאות', 'עובדות'] },
-  { id: 'format', label: 'פורמט פלט ברור', keywords: ['פורמט', 'נקודות', 'סיכום'] },
-];
-
-export default function PromptEditor({ config }: PromptEditorProps) {
-  const initial = useMemo(
-    () => promptTemplate(config.name.trim() ? `"${config.name.trim()}"` : '', config.role),
-    [config.name, config.role],
+export default function PromptEditor({ work, update }: PromptEditorProps) {
+  const config = work.agentConfig;
+  const initial = promptTemplate(
+    config.name.trim() ? `"${config.name.trim()}"` : '',
+    config.role,
   );
-  const [prompt, setPrompt] = useState(initial);
-  const [touched, setTouched] = useState(false);
-
-  const text = touched ? prompt : initial;
+  const text = work.promptText ?? initial;
+  const result = evaluatePrompt(text, config);
 
   return (
     <section className="screen">
       <h2 className="screen-title">⌨️ כתיבת פרומפט המערכת</h2>
       <p className="screen-lead">
         שלב 3 של FDE — הטמעה. פרומפט המערכת הוא "תעודת הזהות" שהסוכן מקבל לפני
-        שהוא רואה אפילו מברק אחד. הכנו לכם תבנית על בסיס ההגדרות שבחרתם —
-        אתם מוזמנים לערוך, לשפר ולהוסיף.
+        שהוא רואה אפילו מברק אחד. הכנו תבנית על בסיס ההגדרות שבחרתם — ערכו
+        ושפרו אותה, ועקבו אחרי <strong>מחוון האיכות</strong>: הציון ישפיע ישירות
+        על חדות הניתוח בסימולציה.
       </p>
 
       <div className="prompt-layout">
@@ -42,19 +36,13 @@ export default function PromptEditor({ config }: PromptEditorProps) {
             className="prompt-textarea"
             value={text}
             rows={18}
-            onChange={(e) => {
-              setTouched(true);
-              setPrompt(e.target.value);
-            }}
+            onChange={(e) => update({ promptText: e.target.value })}
             spellCheck={false}
           />
-          {touched && (
+          {work.promptText !== null && (
             <button
               className="btn btn-ghost btn-small"
-              onClick={() => {
-                setTouched(false);
-                setPrompt(initial);
-              }}
+              onClick={() => update({ promptText: null })}
             >
               ↺ שחזור התבנית המקורית
             </button>
@@ -62,25 +50,36 @@ export default function PromptEditor({ config }: PromptEditorProps) {
         </div>
 
         <aside className="card prompt-tips">
-          <h3>✅ מה חייב להיות בפרומפט טוב?</h3>
-          <ul className="prompt-checklist">
-            {checklist.map((c) => {
-              const present = c.keywords.some((k) => text.includes(k));
-              return (
-                <li key={c.id} className={present ? 'present' : 'missing'}>
-                  <span className="check-mark">{present ? '✓' : '○'}</span>
-                  {c.label}
-                </li>
-              );
-            })}
-          </ul>
-          <div className="callout">
-            <span className="callout-icon">💡</span>
-            <p>
-              טיפ: פרומפט טוב הוא ספציפי. "תהיה מועיל" — חלש. "ציין רמת ודאות
-              לכל קביעה" — חזק. נסו להוסיף כלל משלכם!
-            </p>
+          <h3>📏 מחוון איכות הפרומפט</h3>
+          <div className={`rubric-total band-${result.band}`}>
+            <div className="rubric-total-score">
+              {result.total}<span>/{result.max}</span>
+            </div>
+            <p>{result.bandLabel}</p>
           </div>
+
+          <ul className="rubric-list">
+            {result.perCriterion.map(({ criterion, score }) => (
+              <li key={criterion.id} className={`rubric-item score-${score}`}>
+                <div className="rubric-item-head">
+                  <span className="rubric-item-title">
+                    {criterion.icon} {criterion.title}
+                  </span>
+                  <span className="rubric-dots" aria-label={`${score} מתוך 2`}>
+                    <i className={score >= 1 ? 'on' : ''} />
+                    <i className={score >= 2 ? 'on' : ''} />
+                  </span>
+                </div>
+                <p className="rubric-level">{criterion.levels[score]}</p>
+                {score < 2 && <p className="rubric-tip">💡 {criterion.tip}</p>}
+              </li>
+            ))}
+          </ul>
+
+          <p className="rubric-disclaimer">
+            המחוון הוא הערכה אוטומטית ראשונית של מבנה הפרומפט — הוא לא מבין את
+            התוכן לעומק. השוו את הפרומפט שלכם גם עם חברים ועם המורה.
+          </p>
         </aside>
       </div>
     </section>

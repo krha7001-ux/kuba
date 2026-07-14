@@ -1,8 +1,13 @@
-import { useState } from 'react';
 import { reflectionQuestions } from '../../data/content';
+import { StudentWork } from '../../types';
 
-export default function Reflection() {
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+interface ReflectionProps {
+  work: StudentWork;
+  update: (patch: Partial<StudentWork>) => void;
+}
+
+export default function Reflection({ work, update }: ReflectionProps) {
+  const answers = work.reflectionAnswers;
 
   const answeredCount = reflectionQuestions.filter(
     (q) => (answers[q.id] ?? '').trim().length > 0,
@@ -13,7 +18,7 @@ export default function Reflection() {
       <h2 className="screen-title">🪞 רפלקציה וסיכום</h2>
       <p className="screen-lead">
         רגע לפני שיוצאים מחדר המצב — עצרו וחשבו. כתבו תשובה קצרה (2–3 משפטים)
-        לכל שאלה. אין תשובה "נכונה" אחת.
+        לכל שאלה. אין תשובה "נכונה" אחת, והתשובות ייכנסו לדוח המשימה שלכם.
       </p>
 
       <div className="reflection-grid">
@@ -28,7 +33,9 @@ export default function Reflection() {
               rows={4}
               placeholder="כתבו כאן את המחשבות שלכם..."
               value={answers[q.id] ?? ''}
-              onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
+              onChange={(e) =>
+                update({ reflectionAnswers: { ...answers, [q.id]: e.target.value } })
+              }
             />
           </div>
         ))}
@@ -38,8 +45,8 @@ export default function Reflection() {
         <span className="callout-icon">{answeredCount === reflectionQuestions.length ? '🌟' : '✍️'}</span>
         <p>
           {answeredCount === reflectionQuestions.length
-            ? 'עניתם על כל השאלות — כל הכבוד! שתפו את התשובות בדיון כיתתי.'
-            : `עניתם על ${answeredCount} מתוך ${reflectionQuestions.length} שאלות. התשובות נשמרות על המסך לצורך דיון בכיתה.`}
+            ? 'עניתם על כל השאלות — כל הכבוד! התשובות נשמרו וייכללו בדוח המשימה.'
+            : `עניתם על ${answeredCount} מתוך ${reflectionQuestions.length} שאלות. התשובות נשמרות אוטומטית — גם אם תרעננו את הדף.`}
         </p>
       </div>
     </section>
