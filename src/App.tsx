@@ -59,7 +59,14 @@ export default function App() {
 
       {step > 0 && <StepNav steps={steps} current={step} onSelect={goTo} />}
 
-      <main className="screen-container">{screens[step]}</main>
+      {/* כל המסכים נשארים ב־DOM כדי שעבודת התלמידים (טפסים, בחירות, תשובות) לא תאבד במעבר בין שלבים */}
+      <main className="screen-container">
+        {screens.map((s, i) => (
+          <div key={steps[i].id} className={`screen-slot${i === step ? ' active' : ''}`}>
+            {s}
+          </div>
+        ))}
+      </main>
 
       {step > 0 && (
         <footer className="step-footer">
