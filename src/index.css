@@ -145,7 +145,12 @@ button {
 
 /* ===== מסכים כלליים ===== */
 
-.screen {
+.screen-slot {
+  display: none;
+}
+
+.screen-slot.active {
+  display: block;
   animation: fade-in 0.35s ease;
 }
 
