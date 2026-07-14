@@ -3,8 +3,8 @@
 // אין כאן AI אמיתי — יש כאן שיעור על איך הגדרות משנות התנהגות.
 
 import { StudentWork } from '../types';
-import { promptTemplate, ActionOption, actionOptions } from './content';
-import { evaluatePrompt, RubricResult } from './promptRubric';
+import { ActionOption, actionOptions } from './content';
+import { evaluateSections, RubricResult } from './promptBuilder';
 
 export interface SimFact {
   text: string;
@@ -104,9 +104,7 @@ export const militaryOption: ActionOption = {
 
 export function buildSimulation(work: StudentWork): SimResult {
   const { agentConfig } = work;
-  const promptText =
-    work.promptText ?? promptTemplate(agentConfig.name, agentConfig.role);
-  const rubric = evaluatePrompt(promptText, agentConfig);
+  const rubric = evaluateSections(work.promptSections);
   const quality: SimResult['quality'] =
     rubric.band === 'draft' ? 'low' : rubric.band === 'progress' ? 'mid' : 'high';
 
@@ -164,7 +162,7 @@ export function buildSimulation(work: StudentWork): SimResult {
     debrief.push({
       kind: 'quality',
       icon: '⌨️',
-      text: `הפרומפט קיבל ${rubric.total}/${rubric.max} במחוון, ולכן הפלט כללי ומעורפל. חזרו לשלב 3 וחזקו את הקריטריונים החסרים — ותראו את ההבדל בניתוח.`,
+      text: `הפרומפט קיבל ${rubric.total}/${rubric.max} במחוון, ולכן הפלט כללי ומעורפל. חזרו לסדנת הפרומפט, חזקו את הרכיבים החלשים — והריצו שוב כדי לראות את ההבדל.`,
     });
   } else if (quality === 'high') {
     debrief.push({

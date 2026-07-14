@@ -62,7 +62,7 @@ export default function App() {
     <Bottlenecks work={work} update={update} />,
     <AgentDesigner work={work} update={update} />,
     <PromptEditor work={work} update={update} />,
-    <Simulation work={work} update={update} />,
+    <Simulation work={work} update={update} onEditPrompt={() => goTo(6)} />,
     <Reflection work={work} update={update} />,
     <Comparison />,
     <MissionReport work={work} goTo={goTo} reset={reset} />,

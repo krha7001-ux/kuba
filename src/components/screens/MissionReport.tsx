@@ -1,11 +1,8 @@
 import { StudentWork } from '../../types';
-import {
-  bottleneckOptions,
-  promptTemplate,
-  reflectionQuestions,
-} from '../../data/content';
+import { bottleneckOptions, reflectionQuestions } from '../../data/content';
 import { evidenceItems } from '../../data/pedagogy';
 import { buildSimulation } from '../../data/simulationEngine';
+import { assemblePrompt } from '../../data/promptBuilder';
 
 interface MissionReportProps {
   work: StudentWork;
@@ -23,14 +20,14 @@ export default function MissionReport({ work, goTo, reset }: MissionReportProps)
   const bottleneck = bottleneckOptions.find((b) => b.id === work.mainBottleneckId);
   const evidence = evidenceItems.filter((e) => work.evidenceIds.includes(e.id));
   const decision = sim.options.find((o) => o.id === work.simulationChoice);
-  const promptText =
-    work.promptText ?? promptTemplate(config.name.trim() ? `"${config.name.trim()}"` : '', config.role);
+  const promptText = assemblePrompt(work.promptSections);
 
   const missing: { label: string; step: number }[] = [];
   if (!bottleneck || evidence.length < 2 || work.bottleneckStatement.trim().length < 20)
     missing.push({ label: 'לוח הראיות (ראיות + צוואר בקבוק + טיעון)', step: STEP.bottlenecks });
   if (!config.name.trim() || !config.role) missing.push({ label: 'תכנון הסוכן', step: STEP.agent });
-  if (work.promptText === null) missing.push({ label: 'עריכת הפרומפט', step: STEP.prompt });
+  if (sim.rubric.total <= 5)
+    missing.push({ label: 'שדרוג הפרומפט (הציון עדיין נמוך)', step: STEP.prompt });
   if (!decision) missing.push({ label: 'החלטה בסימולציה', step: STEP.simulation });
   const answeredReflections = reflectionQuestions.filter(
     (q) => (work.reflectionAnswers[q.id] ?? '').trim().length > 0,

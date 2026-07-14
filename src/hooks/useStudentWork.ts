@@ -12,6 +12,7 @@ function load(): StudentWork {
         ...emptyStudentWork,
         ...parsed,
         agentConfig: { ...emptyStudentWork.agentConfig, ...parsed.agentConfig },
+        promptSections: { ...emptyStudentWork.promptSections, ...parsed.promptSections },
       };
     }
   } catch {
