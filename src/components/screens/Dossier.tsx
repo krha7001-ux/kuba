@@ -7,6 +7,9 @@ import {
   excommInfo,
   DossierPerson,
 } from '../../data/content';
+import { StudentWork } from '../../types';
+import SourceBadge from '../SourceBadge';
+import DocQuiz from '../DocQuiz';
 
 const tabs = [
   { id: 'telegrams', label: 'מברקים סודיים', icon: '📜' },
@@ -18,7 +21,20 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]['id'];
 
-function PersonCard({ person }: { person: DossierPerson }) {
+interface DossierProps {
+  work: StudentWork;
+  update: (patch: Partial<StudentWork>) => void;
+}
+
+function PersonCard({
+  person,
+  docId,
+  work,
+  update,
+}: {
+  person: DossierPerson;
+  docId: string;
+} & DossierProps) {
   return (
     <div className="card person-card">
       <div className="person-header">
@@ -28,17 +44,19 @@ function PersonCard({ person }: { person: DossierPerson }) {
           <p className="person-title">{person.title}</p>
         </div>
       </div>
+      <SourceBadge docId={docId} />
       <ul className="check-list">
         {person.facts.map((f) => (
           <li key={f}>{f}</li>
         ))}
       </ul>
       <blockquote className="person-quote">{person.quote}</blockquote>
+      <DocQuiz docId={docId} work={work} update={update} />
     </div>
   );
 }
 
-export default function Dossier() {
+export default function Dossier({ work, update }: DossierProps) {
   const [tab, setTab] = useState<TabId>('telegrams');
 
   return (
@@ -46,7 +64,9 @@ export default function Dossier() {
       <h2 className="screen-title">🗂️ תיק לקוח: הבית הלבן, אוקטובר 1962</h2>
       <p className="screen-lead">
         שלב 1 של FDE — כניסה לשטח. לפניכם חומרי המודיעין שהיו על שולחן קנדי.
-        עברו על הכרטיסיות והכירו את "הלקוח" שלכם.
+        לכל מסמך מוצמדת <strong>תווית מקור</strong> (לחצו עליה להסבר), ולכל מסמך
+        מצורף <strong>ניתוח מסמך</strong> — שלוש שאלות של אנליסט אמיתי. ענו עליהן:
+        הן יעזרו לכם בלוח הראיות שבמסך הבא.
       </p>
 
       <div className="tabs" role="tablist">
@@ -77,32 +97,42 @@ export default function Dossier() {
                 <span><strong>תאריך:</strong> {tg.date}</span>
               </div>
               <p className="telegram-body">{tg.body}</p>
+              <SourceBadge docId={tg.id} />
+              <DocQuiz docId={tg.id} work={work} update={update} />
             </article>
           ))}
         </div>
       )}
 
       {tab === 'photos' && (
-        <div className="photo-grid">
-          {satellitePhotos.map((p) => (
-            <div key={p.id} className="card photo-card">
-              <div className="photo-frame">
-                <span className="photo-crosshair">✛</span>
-                <span className="photo-id">{p.id}</span>
+        <>
+          <SourceBadge docId="photos" />
+          <div className="photo-grid">
+            {satellitePhotos.map((p) => (
+              <div key={p.id} className="card photo-card">
+                <div className="photo-frame">
+                  <span className="photo-crosshair">✛</span>
+                  <span className="photo-id">{p.id}</span>
+                </div>
+                <h4>📍 {p.location}</h4>
+                <p className="photo-date">צולם: {p.date}</p>
+                <p>{p.finding}</p>
+                <span className={`confidence-badge ${p.confidence === 'ודאות גבוהה' ? 'high' : p.confidence === 'ודאות בינונית' ? 'mid' : 'low'}`}>
+                  {p.confidence}
+                </span>
               </div>
-              <h4>📍 {p.location}</h4>
-              <p className="photo-date">צולם: {p.date}</p>
-              <p>{p.finding}</p>
-              <span className={`confidence-badge ${p.confidence === 'ודאות גבוהה' ? 'high' : p.confidence === 'ודאות בינונית' ? 'mid' : 'low'}`}>
-                {p.confidence}
-              </span>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+          <DocQuiz docId="photos" work={work} update={update} />
+        </>
       )}
 
-      {tab === 'kennedy' && <PersonCard person={kennedy} />}
-      {tab === 'khrushchev' && <PersonCard person={khrushchev} />}
+      {tab === 'kennedy' && (
+        <PersonCard person={kennedy} docId="kennedy" work={work} update={update} />
+      )}
+      {tab === 'khrushchev' && (
+        <PersonCard person={khrushchev} docId="khrushchev" work={work} update={update} />
+      )}
 
       {tab === 'excomm' && (
         <div className="card person-card">
@@ -113,11 +143,13 @@ export default function Dossier() {
               <p className="person-title">{excommInfo.subtitle}</p>
             </div>
           </div>
+          <SourceBadge docId="excomm" />
           <ul className="check-list">
             {excommInfo.facts.map((f) => (
               <li key={f}>{f}</li>
             ))}
           </ul>
+          <DocQuiz docId="excomm" work={work} update={update} />
         </div>
       )}
     </section>

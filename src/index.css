@@ -1182,3 +1182,698 @@ button {
     text-align: center;
   }
 }
+
+/* ===== תוויות מקור (שקיפות היסטורית) ===== */
+
+.source-badge-wrap {
+  margin: 0.6rem 0;
+}
+
+.source-badge {
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: transparent;
+  font-family: var(--font);
+}
+
+.source-authentic { color: var(--green); border-color: rgba(79, 196, 127, 0.5); background: rgba(79, 196, 127, 0.08); }
+.source-processed { color: var(--blue); border-color: rgba(90, 162, 232, 0.5); background: rgba(90, 162, 232, 0.08); }
+.source-simulated { color: var(--amber); border-color: rgba(245, 185, 66, 0.5); background: rgba(245, 185, 66, 0.08); }
+
+.source-note {
+  margin-top: 0.4rem;
+  font-size: 0.83rem;
+  color: var(--text-dim);
+  background: var(--bg-soft);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  max-width: 42rem;
+}
+
+.telegram .source-note {
+  color: var(--paper-ink);
+  background: rgba(51, 41, 26, 0.06);
+  border-color: rgba(51, 41, 26, 0.35);
+  font-family: var(--font);
+}
+
+/* ===== ניתוח מסמך (שאלות חקר) ===== */
+
+.doc-quiz {
+  margin-top: 0.8rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.6rem;
+}
+
+.telegram .doc-quiz {
+  border-top-color: rgba(51, 41, 26, 0.35);
+}
+
+.doc-quiz-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--blue);
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: var(--font);
+}
+
+.telegram .doc-quiz-toggle {
+  color: #1c4e7a;
+  border-color: rgba(51, 41, 26, 0.4);
+}
+
+.doc-quiz-toggle:hover {
+  border-color: var(--blue);
+}
+
+.doc-quiz-body {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.doc-question {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-family: var(--font);
+}
+
+.doc-question-text {
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+
+.doc-question-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.doc-option {
+  text-align: right;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.88rem;
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+
+.doc-option:hover {
+  border-color: var(--blue);
+  color: var(--text);
+}
+
+.doc-option.good {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(79, 196, 127, 0.08);
+}
+
+.doc-option.partial {
+  border-color: var(--amber);
+  color: var(--amber);
+  background: rgba(245, 185, 66, 0.08);
+}
+
+.doc-feedback {
+  margin-top: 0.6rem;
+  font-size: 0.86rem;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: var(--text);
+}
+
+.doc-feedback.good {
+  background: rgba(79, 196, 127, 0.1);
+  border: 1px solid rgba(79, 196, 127, 0.35);
+}
+
+.doc-feedback.partial {
+  background: rgba(245, 185, 66, 0.1);
+  border: 1px solid rgba(245, 185, 66, 0.35);
+}
+
+/* ===== לוח ראיות ===== */
+
+.evidence-board {
+  margin-top: 2.2rem;
+  border-top: 2px dashed var(--border);
+  padding-top: 1.2rem;
+}
+
+.evidence-subtitle {
+  color: var(--text);
+  margin: 1.1rem 0 0.6rem;
+  font-size: 0.98rem;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.8rem;
+}
+
+.evidence-card {
+  text-align: right;
+  color: var(--text-dim);
+  position: relative;
+  padding: 0.9rem 1rem;
+  transition: all 0.15s;
+  border-width: 2px;
+}
+
+.evidence-card:hover {
+  border-color: var(--blue);
+}
+
+.evidence-card.pinned {
+  border-color: var(--amber);
+  background: var(--panel-light);
+  color: var(--text);
+}
+
+.evidence-pin {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.7rem;
+  font-size: 1rem;
+}
+
+.evidence-icon {
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.evidence-card p {
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
+}
+
+.evidence-source {
+  font-size: 0.75rem;
+  color: var(--amber);
+  font-family: var(--mono);
+}
+
+.evidence-bottleneck-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.evidence-bottleneck-choice {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  color: var(--text-dim);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.88rem;
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+
+.evidence-bottleneck-choice:hover {
+  border-color: var(--blue);
+  color: var(--text);
+}
+
+.evidence-bottleneck-choice.chosen {
+  border-color: var(--amber);
+  background: rgba(245, 185, 66, 0.12);
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.evidence-board .reflection-textarea {
+  margin-top: 0.2rem;
+}
+
+.board-done {
+  border-color: rgba(79, 196, 127, 0.5);
+  background: rgba(79, 196, 127, 0.07);
+}
+
+/* ===== מחוון איכות הפרומפט ===== */
+
+.rubric-total {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.9rem;
+  border: 1px solid var(--border);
+}
+
+.rubric-total-score {
+  font-size: 1.7rem;
+  font-weight: 800;
+  font-family: var(--mono);
+}
+
+.rubric-total-score span {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+.rubric-total p {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.band-draft { border-color: rgba(228, 87, 79, 0.5); background: rgba(228, 87, 79, 0.07); }
+.band-draft .rubric-total-score { color: var(--red); }
+.band-progress { border-color: rgba(245, 185, 66, 0.5); background: rgba(245, 185, 66, 0.07); }
+.band-progress .rubric-total-score { color: var(--amber); }
+.band-operational { border-color: rgba(79, 196, 127, 0.5); background: rgba(79, 196, 127, 0.07); }
+.band-operational .rubric-total-score { color: var(--green); }
+
+.rubric-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.rubric-item {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+}
+
+.rubric-item.score-2 { border-color: rgba(79, 196, 127, 0.4); }
+.rubric-item.score-1 { border-color: rgba(245, 185, 66, 0.4); }
+.rubric-item.score-0 { border-color: rgba(228, 87, 79, 0.4); }
+
+.rubric-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rubric-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.rubric-dots {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.rubric-dots i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.score-2 .rubric-dots i.on { background: var(--green); }
+.score-1 .rubric-dots i.on { background: var(--amber); }
+
+.rubric-level {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+}
+
+.rubric-tip {
+  font-size: 0.82rem;
+  color: var(--amber);
+  margin-top: 0.3rem;
+}
+
+.rubric-disclaimer {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  border-top: 1px dashed var(--border);
+  padding-top: 0.7rem;
+}
+
+/* ===== קיבוץ שלבי FDE בניווט ===== */
+
+.phase-group {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+.phase-group.current {
+  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.phase-group-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  padding-right: 0.2rem;
+  white-space: nowrap;
+}
+
+.phase-group.current .phase-group-label {
+  color: var(--amber);
+}
+
+.phase-group-chips {
+  display: flex;
+  gap: 0.35rem;
+}
+
+/* ===== באנר שלב נוכחי ===== */
+
+.phase-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid var(--border);
+  border-right: 4px solid var(--amber);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.phase-banner-icon {
+  font-size: 1.4rem;
+}
+
+.phase-banner strong {
+  display: block;
+  color: var(--text);
+}
+
+.phase-banner-desc {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
+
+.phase-banner-dots {
+  margin-inline-start: auto;
+  display: flex;
+  gap: 5px;
+}
+
+.phase-banner-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.phase-banner-dots i.on {
+  background: var(--amber);
+}
+
+.phase-tone-0 { border-right-color: var(--text-dim); }
+.phase-tone-1 { border-right-color: var(--blue); }
+.phase-tone-2 { border-right-color: #a78bfa; }
+.phase-tone-3 { border-right-color: var(--amber); }
+.phase-tone-4 { border-right-color: var(--green); }
+.phase-tone-5 { border-right-color: var(--red); }
+
+/* ===== סימולציה מסתעפת ===== */
+
+.sim-config-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.sim-chip {
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  color: var(--text-dim);
+  background: var(--panel);
+}
+
+.sim-chip.quality-low { color: var(--red); border-color: rgba(228, 87, 79, 0.5); }
+.sim-chip.quality-mid { color: var(--amber); border-color: rgba(245, 185, 66, 0.5); }
+.sim-chip.quality-high { color: var(--green); border-color: rgba(79, 196, 127, 0.5); }
+
+.sim-role-flavor {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  font-style: italic;
+  margin-bottom: 0.7rem;
+}
+
+.fact-confidence {
+  font-size: 0.8rem;
+  font-family: var(--mono);
+}
+
+.conf-high { color: var(--green); }
+.conf-mid { color: var(--amber); }
+.conf-low { color: var(--red); }
+
+.sim-gaps {
+  background: rgba(228, 87, 79, 0.07);
+  border: 1px dashed rgba(228, 87, 79, 0.4);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-top: 0.8rem;
+}
+
+.sim-gaps h4 {
+  color: var(--red) !important;
+  margin-top: 0 !important;
+}
+
+.debrief {
+  margin-top: 1.4rem;
+}
+
+.debrief-note {
+  margin: 0.6rem 0;
+}
+
+.debrief-hallucination {
+  border-color: rgba(228, 87, 79, 0.55);
+  background: rgba(228, 87, 79, 0.09);
+}
+
+.debrief-praise {
+  border-color: rgba(79, 196, 127, 0.45);
+  background: rgba(79, 196, 127, 0.07);
+}
+
+.debrief-safety, .debrief-quality, .debrief-gap {
+  border-color: rgba(245, 185, 66, 0.45);
+  background: rgba(245, 185, 66, 0.06);
+}
+
+.debrief .btn {
+  margin-top: 0.8rem;
+}
+
+/* ===== דוח משימה ===== */
+
+.report-missing .report-missing-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.report-sheet {
+  background: var(--paper);
+  color: var(--paper-ink);
+  border-radius: 8px;
+  padding: 1.6rem;
+  box-shadow: var(--shadow);
+  border-right: 6px solid var(--amber-dark);
+}
+
+.report-header {
+  text-align: center;
+  border-bottom: 2px solid rgba(51, 41, 26, 0.4);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.report-stamp {
+  display: inline-block;
+  font-family: var(--mono);
+  color: #a02b25;
+  border: 2px solid #a02b25;
+  border-radius: 4px;
+  padding: 0.1rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transform: rotate(-1.5deg);
+  margin-bottom: 0.6rem;
+}
+
+.report-header h3 {
+  font-size: 1.2rem;
+}
+
+.report-header p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.report-section {
+  margin-bottom: 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed rgba(51, 41, 26, 0.3);
+}
+
+.report-section:last-child {
+  border-bottom: none;
+}
+
+.report-section h4 {
+  margin-bottom: 0.5rem;
+  color: #5c4a1e;
+}
+
+.report-highlight {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.report-risk {
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.report-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+}
+
+.report-quote {
+  border-right: 3px solid var(--amber-dark);
+  padding: 0.3rem 0.8rem;
+  margin: 0.3rem 0;
+  font-style: italic;
+  white-space: pre-wrap;
+}
+
+.report-empty {
+  color: #a02b25;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.report-warning {
+  margin-top: 0.6rem;
+  background: rgba(160, 43, 37, 0.08);
+  border: 1px dashed #a02b25;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.88rem;
+}
+
+.report-prompt {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  background: rgba(51, 41, 26, 0.05);
+  border: 1px solid rgba(51, 41, 26, 0.25);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  direction: rtl;
+  line-height: 1.6;
+}
+
+.report-sheet .check-list li::before {
+  color: var(--amber-dark);
+}
+
+.report-sheet .agent-summary dt {
+  color: #5c4a1e;
+}
+
+.report-reflection {
+  margin-bottom: 0.7rem;
+}
+
+.report-actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  margin-top: 1.4rem;
+  flex-wrap: wrap;
+}
+
+/* ===== הדפסת הדוח ===== */
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .app-header, .step-nav, .phase-banner, .step-footer,
+  .report-actions, .report-missing, .screen-title, .screen-lead {
+    display: none !important;
+  }
+
+  .screen-slot {
+    display: none !important;
+  }
+
+  .screen-slot.active {
+    display: block !important;
+  }
+
+  .report-sheet {
+    box-shadow: none;
+    border: 1px solid #999;
+  }
+}
+
+/* ===== רספונסיביות לרכיבים החדשים ===== */
+
+@media (max-width: 720px) {
+  .phase-banner {
+    flex-wrap: wrap;
+  }
+
+  .phase-banner-dots {
+    display: none;
+  }
+
+  .evidence-bottleneck-row {
+    flex-direction: column;
+  }
+
+  .evidence-bottleneck-choice {
+    text-align: right;
+  }
+
+  .report-sheet {
+    padding: 1rem;
+  }
+}

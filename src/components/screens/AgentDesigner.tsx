@@ -1,4 +1,4 @@
-import { AgentConfig } from '../../types';
+import { StudentWork } from '../../types';
 import {
   roleOptions,
   knowledgeOptions,
@@ -7,11 +7,15 @@ import {
 } from '../../data/content';
 
 interface AgentDesignerProps {
-  config: AgentConfig;
-  onChange: (c: AgentConfig) => void;
+  work: StudentWork;
+  update: (patch: Partial<StudentWork>) => void;
 }
 
-export default function AgentDesigner({ config, onChange }: AgentDesignerProps) {
+export default function AgentDesigner({ work, update }: AgentDesignerProps) {
+  const config = work.agentConfig;
+  const setConfig = (patch: Partial<typeof config>) =>
+    update({ agentConfig: { ...config, ...patch } });
+
   const toggleInList = (list: string[], value: string) =>
     list.includes(value) ? list.filter((v) => v !== value) : [...list, value];
 
@@ -27,7 +31,8 @@ export default function AgentDesigner({ config, onChange }: AgentDesignerProps) 
       <h2 className="screen-title">🤖 תכנון סוכן ה־AI שלכם</h2>
       <p className="screen-lead">
         שלב 2 של FDE — ארכיטקטורת הפתרון. הגדירו את הסוכן שיסייע לחדר המצב.
-        ההגדרות שתבחרו כאן ילוו אתכם גם במסכי הפרומפט והסימולציה.
+        <strong> כל בחירה כאן תשנה את מה שיקרה בסימולציה:</strong> סוכן בלי
+        תצלומי לוויין לא יידע מה קורה בשטח, וסוכן בלי מגבלות בטיחות... תגלו בעצמכם.
       </p>
 
       <div className="form-grid">
@@ -38,7 +43,7 @@ export default function AgentDesigner({ config, onChange }: AgentDesignerProps) 
             className="text-input"
             placeholder='למשל: "אנליסט צל" או "עין הנץ"'
             value={config.name}
-            onChange={(e) => onChange({ ...config, name: e.target.value })}
+            onChange={(e) => setConfig({ name: e.target.value })}
           />
         </div>
 
@@ -50,7 +55,7 @@ export default function AgentDesigner({ config, onChange }: AgentDesignerProps) 
                 type="radio"
                 name="role"
                 checked={config.role === r}
-                onChange={() => onChange({ ...config, role: r })}
+                onChange={() => setConfig({ role: r })}
               />
               <span>{r}</span>
             </label>
@@ -65,10 +70,7 @@ export default function AgentDesigner({ config, onChange }: AgentDesignerProps) 
                 type="checkbox"
                 checked={config.knowledgeSources.includes(k)}
                 onChange={() =>
-                  onChange({
-                    ...config,
-                    knowledgeSources: toggleInList(config.knowledgeSources, k),
-                  })
+                  setConfig({ knowledgeSources: toggleInList(config.knowledgeSources, k) })
                 }
               />
               <span>{k}</span>
@@ -84,10 +86,7 @@ export default function AgentDesigner({ config, onChange }: AgentDesignerProps) 
                 type="checkbox"
                 checked={config.safetyLimits.includes(s)}
                 onChange={() =>
-                  onChange({
-                    ...config,
-                    safetyLimits: toggleInList(config.safetyLimits, s),
-                  })
+                  setConfig({ safetyLimits: toggleInList(config.safetyLimits, s) })
                 }
               />
               <span>{s}</span>
@@ -103,7 +102,7 @@ export default function AgentDesigner({ config, onChange }: AgentDesignerProps) 
                 type="radio"
                 name="output"
                 checked={config.outputType === o}
-                onChange={() => onChange({ ...config, outputType: o })}
+                onChange={() => setConfig({ outputType: o })}
               />
               <span>{o}</span>
             </label>
