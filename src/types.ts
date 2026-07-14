@@ -1,3 +1,5 @@
+import { PromptSections, initialPromptSections } from './data/promptBuilder';
+
 export interface AgentConfig {
   name: string;
   role: string;
@@ -26,8 +28,8 @@ export interface StudentWork {
   mainBottleneckId: string;
   /** הניסוח החופשי של התלמיד */
   bottleneckStatement: string;
-  /** null = התלמיד עדיין לא ערך; מוצגת התבנית האוטומטית */
-  promptText: string | null;
+  /** ששת רכיבי הפרומפט שהתלמיד בונה בסדנה */
+  promptSections: PromptSections;
   simulationChoice: string | null;
   reflectionAnswers: Record<string, string>;
 }
@@ -39,7 +41,7 @@ export const emptyStudentWork: StudentWork = {
   evidenceIds: [],
   mainBottleneckId: '',
   bottleneckStatement: '',
-  promptText: null,
+  promptSections: initialPromptSections,
   simulationChoice: null,
   reflectionAnswers: {},
 };

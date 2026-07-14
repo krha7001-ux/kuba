@@ -6,9 +6,11 @@ import { buildSimulation } from '../../data/simulationEngine';
 interface SimulationProps {
   work: StudentWork;
   update: (patch: Partial<StudentWork>) => void;
+  /** ניווט חזרה לסדנת הפרומפט לשיפור והרצה מחדש */
+  onEditPrompt: () => void;
 }
 
-export default function Simulation({ work, update }: SimulationProps) {
+export default function Simulation({ work, update, onEditPrompt }: SimulationProps) {
   const [phase, setPhase] = useState<'idle' | 'analyzing' | 'done'>(
     work.simulationChoice ? 'done' : 'idle',
   );
@@ -154,9 +156,14 @@ export default function Simulation({ work, update }: SimulationProps) {
                   <p>{n.text}</p>
                 </div>
               ))}
-              <button className="btn btn-ghost" onClick={rerun}>
-                🔁 שיניתי את התכנון — הרץ שוב את הסוכן
-              </button>
+              <div className="debrief-actions">
+                <button className="btn btn-ghost" onClick={rerun}>
+                  🔁 שיניתי את התכנון — הרץ שוב את הסוכן
+                </button>
+                <button className="btn btn-primary" onClick={onEditPrompt}>
+                  ⌨️ חזרה לשיפור הפרומפט
+                </button>
+              </div>
             </div>
           )}
         </>

@@ -2250,3 +2250,172 @@ button {
     display: none !important;
   }
 }
+
+/* ===== סדנת הפרומפט: בנייה בשישה רכיבים ===== */
+
+.builder-layout {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.builder-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.builder-card {
+  padding-top: 0;
+  overflow: hidden;
+}
+
+.builder-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 -1.2rem 0.8rem;
+  padding: 0.5rem 1.2rem;
+  background: linear-gradient(180deg, rgba(111, 125, 85, 0.35), rgba(111, 125, 85, 0.18));
+  border-bottom: 1px solid rgba(168, 177, 132, 0.3);
+}
+
+.builder-head h3 {
+  font-size: 0.92rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.builder-status {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.12rem 0.7rem;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.builder-status.score-0 { color: var(--red); border-color: rgba(194, 75, 66, 0.55); background: rgba(194, 75, 66, 0.1); }
+.builder-status.score-1 { color: var(--amber); border-color: rgba(211, 195, 154, 0.5); background: rgba(211, 195, 154, 0.08); }
+.builder-status.score-2 { color: var(--green); border-color: rgba(168, 177, 132, 0.55); background: rgba(168, 177, 132, 0.1); }
+
+.builder-textarea {
+  width: 100%;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.8rem;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.builder-textarea:focus {
+  outline: 2px solid var(--amber);
+  border-color: transparent;
+}
+
+.builder-advice {
+  margin-top: 0.55rem;
+  font-size: 0.84rem;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  line-height: 1.55;
+}
+
+.builder-advice.score-0 { background: rgba(194, 75, 66, 0.09); border: 1px dashed rgba(194, 75, 66, 0.45); color: var(--text); }
+.builder-advice.score-1 { background: rgba(211, 195, 154, 0.07); border: 1px dashed rgba(211, 195, 154, 0.4); color: var(--text); }
+.builder-advice.score-2 { background: rgba(168, 177, 132, 0.09); border: 1px solid rgba(168, 177, 132, 0.35); color: var(--green); }
+
+.builder-extra-rule {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.format-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.format-preset {
+  background: linear-gradient(180deg, #232b35, #1b232d);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  border-radius: 4px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.82rem;
+  font-family: var(--font);
+}
+
+.format-preset:hover {
+  border-color: var(--amber);
+  color: var(--text);
+}
+
+.format-preset.active {
+  background: var(--amber);
+  color: var(--ink-on-brass);
+  border-color: var(--amber);
+  font-weight: 700;
+}
+
+.builder-side {
+  position: sticky;
+  top: 4.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.builder-side .rubric-total {
+  margin-bottom: 0;
+}
+
+.builder-side .callout {
+  margin: 0;
+}
+
+.builder-side .btn-small {
+  align-self: flex-start;
+  margin-top: 0;
+}
+
+.prompt-preview {
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: #cfe0b8;
+  padding: 1rem 1.2rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 22rem;
+  overflow-y: auto;
+}
+
+.debrief-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.debrief-actions .btn {
+  margin-top: 0;
+}
+
+@media (max-width: 860px) {
+  .builder-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .builder-side {
+    position: static;
+  }
+}
